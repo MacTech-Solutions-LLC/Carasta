@@ -5,13 +5,13 @@ import { ConversationClient } from "./conversation-client";
 export default async function ConversationPage({
   params,
 }: {
-  params: Promise<{ conversationId: string }>;
+  params: { conversationId: string }>;
 }) {
   const session = await getSession();
   if (!session?.user?.id) redirect("/auth/sign-in");
   const viewerId = (session.user as { id?: string }).id as string;
 
-  const { conversationId } = await params;
+  const { conversationId } = params;
   if (!conversationId || !viewerId) redirect("/messages");
 
   return (

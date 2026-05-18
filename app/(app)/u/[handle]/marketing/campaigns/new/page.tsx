@@ -10,13 +10,13 @@ export default async function NewMarketingCampaignPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ handle: string }>;
-  searchParams: Promise<{ auctionId?: string }>;
+  params: { handle: string }>;
+  searchparams: { auctionId?: string }>;
 }) {
   if (!isMarketingEnabled()) notFound();
 
-  const { handle } = await params;
-  const sp = await searchParams;
+  const { handle } = params;
+  const sp = searchParams ?? {};
   const preselectAuctionId =
     typeof sp.auctionId === "string" && sp.auctionId ? sp.auctionId : undefined;
   const session = await getSession();

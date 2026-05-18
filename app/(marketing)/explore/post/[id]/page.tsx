@@ -37,9 +37,9 @@ function formatPostTime(iso: Date): string {
 export default async function PostDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string }>;
 }) {
-  const { id } = await params;
+  const { id } = params;
   const session = await getSession();
 
   const post = await prisma.post.findUnique({

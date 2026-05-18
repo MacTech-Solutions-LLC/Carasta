@@ -70,7 +70,7 @@ export default async function MarketingAuctionDetailPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ handle: string; auctionId: string }>;
+  params: { handle: string; auctionId: string }>;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   if (!isMarketingEnabled()) notFound();

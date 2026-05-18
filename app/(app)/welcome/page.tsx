@@ -12,13 +12,13 @@ export const dynamic = "force-dynamic";
 export default async function WelcomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchparams: { next?: string }>;
 }) {
   const session = await getSession();
   const viewerId = (session?.user as any)?.id as string | undefined;
   if (!viewerId) redirect("/auth/sign-in?callbackUrl=%2Fwelcome");
 
-  const sp = await searchParams;
+  const sp = searchParams ?? {};
   const next = typeof sp.next === "string" && sp.next.startsWith("/") ? sp.next : "/explore";
 
   const st = await getCarmunityOnboardingState(viewerId);

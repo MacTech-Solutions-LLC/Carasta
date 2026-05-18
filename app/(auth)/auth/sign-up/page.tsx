@@ -31,10 +31,10 @@ const FEATURES = [
 export default async function SignUpPage({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchparams: { [key: string]: string | string[] | undefined }>;
 }) {
   const session = await getSession();
-  const sp = await searchParams;
+  const sp = searchParams ?? {};
   const rawCallback =
     typeof sp.callbackUrl === "string" ? sp.callbackUrl : undefined;
   const callbackUrl = safeCallbackPathOptional(rawCallback);

@@ -42,11 +42,11 @@ import {
 export default async function MarketingPage({
   params,
 }: {
-  params: Promise<{ handle: string }>;
+  params: { handle: string }>;
 }) {
   if (!isMarketingEnabled()) notFound();
 
-  const { handle } = await params;
+  const { handle } = params;
   const session = await getSession();
   const user = await prisma.user.findUnique({
     where: { handle: handle.toLowerCase() },

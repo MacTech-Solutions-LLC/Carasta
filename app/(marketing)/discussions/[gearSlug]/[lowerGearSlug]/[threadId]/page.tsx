@@ -29,7 +29,7 @@ import { PreviewMeter } from "@/components/guest-preview/PreviewMeter";
 export const dynamic = "force-dynamic";
 
 type Props = {
-  params: Promise<{ gearSlug: string; lowerGearSlug: string; threadId: string }>;
+  params: { gearSlug: string; lowerGearSlug: string; threadId: string }>;
 };
 
 function threadDescriptionSnippet(body: string, max = 180) {
@@ -87,7 +87,7 @@ async function resolveValidMentionHandlesForThread(args: {
 }
 
 export default async function ThreadPage({ params }: Props) {
-  const { gearSlug, lowerGearSlug, threadId } = await params;
+  const { gearSlug, lowerGearSlug, threadId } = params;
   const session = await getSession();
   const viewerId = (session?.user as { id?: string } | undefined)?.id ?? null;
   const viewerIsAdmin = (session?.user as { role?: string } | undefined)?.role === "ADMIN";

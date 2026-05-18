@@ -22,11 +22,11 @@ export default async function ListingsPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ handle: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: { handle: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const { handle } = await params;
-  const sp = await searchParams;
+  const { handle } = params;
+  const sp = searchParams ?? {};
   const statusFilter =
     typeof sp.status === "string" && STATUSES.includes(sp.status as any)
       ? (sp.status as (typeof STATUSES)[number])

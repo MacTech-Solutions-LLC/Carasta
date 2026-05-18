@@ -13,7 +13,7 @@ import { CampaignDeleteButton } from "@/components/marketing/campaign-delete-but
 export default async function EditMarketingCampaignPage({
   params,
 }: {
-  params: Promise<{ handle: string; campaignId: string }>;
+  params: { handle: string; campaignId: string }>;
 }) {
   if (!isMarketingEnabled()) notFound();
 

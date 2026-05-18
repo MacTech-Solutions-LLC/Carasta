@@ -20,8 +20,8 @@ import { cn } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 type Props = {
-  params: Promise<{ gearSlug: string; lowerGearSlug: string }>;
-  searchParams: Promise<{ sort?: string; page?: string }>;
+  params: { gearSlug: string; lowerGearSlug: string }>;
+  searchparams: { sort?: string; page?: string }>;
 };
 
 function parseSort(raw: string | undefined): DiscussionSortMode {
@@ -36,7 +36,7 @@ function parsePage(raw: string | undefined): number {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { gearSlug, lowerGearSlug } = await params;
+  const { gearSlug, lowerGearSlug } = params;
   const res = await getLowerGearBySlugs(gearSlug, lowerGearSlug);
   if (!res.ok) return { title: "Discussions" };
   return {
@@ -97,8 +97,8 @@ function SortLink({
 }
 
 export default async function LowerGearPage({ params, searchParams }: Props) {
-  const { gearSlug, lowerGearSlug } = await params;
-  const sp = await searchParams;
+  const { gearSlug, lowerGearSlug } = params;
+  const sp = searchParams ?? {};
   const sort = parseSort(typeof sp.sort === "string" ? sp.sort : undefined);
   const page = parsePage(typeof sp.page === "string" ? sp.page : undefined);
 

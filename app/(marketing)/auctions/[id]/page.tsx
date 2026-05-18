@@ -25,9 +25,9 @@ import {
 export default async function AuctionDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string }>;
 }) {
-  const { id } = await params;
+  const { id } = params;
   const session = await getSession();
 
   const currentUserId = (session?.user as any)?.id;

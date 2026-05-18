@@ -13,10 +13,10 @@ import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
-type Props = { params: Promise<{ gearSlug: string }> };
+type Props = { params: { gearSlug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { gearSlug } = await params;
+  const { gearSlug } = params;
   const res = await getForumSpaceBySlug(gearSlug);
   if (!res.ok) {
     return { title: "Discussions" };
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function GearPage({ params }: Props) {
-  const { gearSlug } = await params;
+  const { gearSlug } = params;
   const res = await getForumSpaceBySlug(gearSlug);
   if (!res.ok) notFound();
 

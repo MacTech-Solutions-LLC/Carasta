@@ -10,7 +10,7 @@ import { MarketingPresetDeleteButton } from "@/components/marketing/marketing-pr
 export default async function EditMarketingPresetPage({
   params,
 }: {
-  params: Promise<{ handle: string; presetId: string }>;
+  params: { handle: string; presetId: string }>;
 }) {
   if (!isMarketingEnabled()) notFound();
 

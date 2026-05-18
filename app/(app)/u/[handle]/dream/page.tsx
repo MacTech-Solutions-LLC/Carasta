@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 export default async function DreamGaragePage({
   params,
 }: {
-  params: Promise<{ handle: string }>;
+  params: { handle: string };
 }) {
-  const { handle } = await params;
+  const { handle } = params;
   const session = await getSession();
   const user = await prisma.user.findUnique({
     where: { handle: handle.toLowerCase() },

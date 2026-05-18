@@ -7,9 +7,9 @@ export const dynamic = "force-dynamic";
 export default async function AdminReputationPage({
   params,
 }: {
-  params: Promise<{ handle: string }>;
+  params: { handle: string }>;
 }) {
-  const { handle } = await params;
+  const { handle } = params;
 
   const user = await prisma.user.findUnique({
     where: { handle: handle.toLowerCase() },

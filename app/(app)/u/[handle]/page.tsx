@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
+import type { Prisma } from "@prisma/client";
+
+type WonAuction = Prisma.AuctionGetPayload<{
+  include: {
+    bids: true;
+    images: true;
+  };
+}>;
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -39,9 +47,9 @@ import { cn } from "@/lib/utils";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ handle: string }>;
+  params: { handle: string };
 }): Promise<Metadata> {
-  const { handle } = await params;
+  const { handle } = params;
   const user = await prisma.user.findUnique({
     where: { handle: handle.toLowerCase() },
     select: { handle: true, name: true, bio: true, avatarUrl: true, image: true },
@@ -84,11 +92,11 @@ export default async function ProfilePage({
   params,
   searchParams,
 }: {
-  params: Promise<{ handle: string }>;
-  searchParams?: Promise<{ activityPage?: string }>;
+  params: { handle: string };
+  searchParams?: { activityPage?: string };
 }) {
-  const { handle } = await params;
-  const sp = (await searchParams) ?? {};
+  const { handle } = params;
+  const sp = searchParams ?? {};
   const session = await getSession();
   const currentUserId = (session?.user as { id?: string } | undefined)?.id;
 
@@ -170,19 +178,26 @@ export default async function ProfilePage({
     }),
   ]);
 
-  const wonAuctions = await prisma.auction.findMany({
-    where: {
-      status: "SOLD",
-      OR: [{ buyerId: user.id }, { bids: { some: { bidderId: user.id } } }],
-    },
-    include: {
-      bids: { orderBy: { amountCents: "desc" }, take: 1 },
-      images: { orderBy: { sortOrder: "asc" }, take: 1 },
-    },
-  });
-  const wonAuctionsFiltered = wonAuctions.filter(
-    (a) => a.buyerId === user.id || a.bids[0]?.bidderId === user.id
-  );
+  let wonAuctionsFiltered: WonAuction[] = [];
+  try {
+    const wonAuctions = await prisma.auction.findMany({
+      where: {
+        status: "SOLD",
+        OR: [{ buyerId: user.id }, { bids: { some: { bidderId: user.id } } }],
+      },
+      take: 20,
+      include: {
+        bids: { orderBy: { amountCents: "desc" }, take: 1 },
+        images: { orderBy: { sortOrder: "asc" }, take: 1 },
+      },
+    });
+    wonAuctionsFiltered = wonAuctions.filter(
+      (a) => a.buyerId === user.id || a.bids[0]?.bidderId === user.id
+    );
+  } catch {
+    // Non-fatal: won auctions are a nice-to-have; don’t block profile render.
+    wonAuctionsFiltered = [];
+  }
 
   const profileBadges = user.userBadges.map((ub) => ({
     slug: ub.badge.slug,

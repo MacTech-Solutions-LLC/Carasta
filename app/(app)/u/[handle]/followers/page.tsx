@@ -9,15 +9,15 @@ import { peerUserIdsHiddenFromViewer } from "@/lib/user-safety";
 
 export const dynamic = "force-dynamic";
 
-type Props = { params: Promise<{ handle: string }> };
+type Props = { params: { handle: string } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { handle } = await params;
+  const { handle } = params;
   return { title: `@${handle} — Followers` };
 }
 
 export default async function FollowersPage({ params }: Props) {
-  const { handle } = await params;
+  const { handle } = params;
   const session = await getSession();
   const viewerId = (session?.user as { id?: string } | undefined)?.id ?? null;
 
