@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { AppStoreBadges } from "@/components/ui/app-store-badges";
