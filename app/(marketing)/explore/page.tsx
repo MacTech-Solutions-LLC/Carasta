@@ -13,7 +13,7 @@ import { ContextualHelpCard } from "@/components/help/ContextualHelpCard";
 import { CommunityFeed } from "./community-feed";
 import { TrendingDreamGarage } from "./TrendingDreamGarage";
 
-type SearchParams = { tab?: string } | Promise<{ tab?: string }>;
+type SearchParams = { tab?: string };
 
 function navPillClass(active: boolean) {
   return cn(
@@ -30,7 +30,7 @@ export default async function ExplorePage({
 }: {
   searchParams: SearchParams;
 }) {
-  const params = searchParams instanceof Promise ? await searchParams : searchParams;
+  const params = searchParams;
   const rawTab = typeof params.tab === "string" ? params.tab : "";
   const tab = rawTab === "following" ? "following" : "latest";
   const session = await getSession();

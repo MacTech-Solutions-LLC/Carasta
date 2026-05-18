@@ -5,7 +5,7 @@ import { ConversationClient } from "./conversation-client";
 export default async function ConversationPage({
   params,
 }: {
-  params: { conversationId: string }>;
+  params: { conversationId: string };
 }) {
   const session = await getSession();
   if (!session?.user?.id) redirect("/auth/sign-in");

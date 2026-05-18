@@ -20,8 +20,8 @@ import { cn } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 type Props = {
-  params: { gearSlug: string; lowerGearSlug: string }>;
-  searchparams: { sort?: string; page?: string }>;
+  params: { gearSlug: string; lowerGearSlug: string };
+  searchParams?: { sort?: string; page?: string };
 };
 
 function parseSort(raw: string | undefined): DiscussionSortMode {

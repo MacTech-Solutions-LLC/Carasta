@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
-type Props = { params: { gearSlug: string }> };
+type Props = { params: { gearSlug: string } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { gearSlug } = params;

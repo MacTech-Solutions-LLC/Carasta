@@ -13,11 +13,11 @@ import { CampaignDeleteButton } from "@/components/marketing/campaign-delete-but
 export default async function EditMarketingCampaignPage({
   params,
 }: {
-  params: { handle: string; campaignId: string }>;
+  params: { handle: string; campaignId: string };
 }) {
   if (!isMarketingEnabled()) notFound();
 
-  const { handle, campaignId } = await params;
+  const { handle, campaignId } = params;
   const session = await getSession();
   const user = await prisma.user.findUnique({
     where: { handle: handle.toLowerCase() },

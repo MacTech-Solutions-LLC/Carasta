@@ -11,7 +11,7 @@ import { MarketingPresetQueryCopy } from "@/components/marketing/marketing-prese
 export default async function MarketingPresetsPage({
   params,
 }: {
-  params: { handle: string }>;
+  params: { handle: string };
 }) {
   if (!isMarketingEnabled()) notFound();
 

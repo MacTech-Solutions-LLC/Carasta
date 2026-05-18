@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export default async function WelcomePage({
   searchParams,
 }: {
-  searchparams: { next?: string }>;
+  searchParams?: { next?: string };
 }) {
   const session = await getSession();
   const viewerId = (session?.user as any)?.id as string | undefined;

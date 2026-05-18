@@ -8,7 +8,7 @@ import { MarketingPresetForm } from "@/components/marketing/marketing-preset-for
 export default async function NewMarketingPresetPage({
   params,
 }: {
-  params: { handle: string }>;
+  params: { handle: string };
 }) {
   if (!isMarketingEnabled()) notFound();
 

@@ -29,7 +29,7 @@ import { PreviewMeter } from "@/components/guest-preview/PreviewMeter";
 export const dynamic = "force-dynamic";
 
 type Props = {
-  params: { gearSlug: string; lowerGearSlug: string; threadId: string }>;
+  params: { gearSlug: string; lowerGearSlug: string; threadId: string };
 };
 
 function threadDescriptionSnippet(body: string, max = 180) {
@@ -39,7 +39,7 @@ function threadDescriptionSnippet(body: string, max = 180) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { threadId } = await params;
+  const { threadId } = params;
   const detail = await getForumThreadDetail(threadId, { viewerIsAdmin: false });
   if (!detail?.ok) return { title: "Thread" };
   const { thread } = detail;

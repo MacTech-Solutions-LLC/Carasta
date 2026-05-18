@@ -10,11 +10,11 @@ import { MarketingPresetDeleteButton } from "@/components/marketing/marketing-pr
 export default async function EditMarketingPresetPage({
   params,
 }: {
-  params: { handle: string; presetId: string }>;
+  params: { handle: string; presetId: string };
 }) {
   if (!isMarketingEnabled()) notFound();
 
-  const { handle, presetId } = await params;
+  const { handle, presetId } = params;
   const session = await getSession();
   const user = await prisma.user.findUnique({
     where: { handle: handle.toLowerCase() },

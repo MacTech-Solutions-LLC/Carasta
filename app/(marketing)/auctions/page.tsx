@@ -25,9 +25,7 @@ const AuctionsMapView = dynamic(
   }
 );
 
-type SearchParams =
-  | { [key: string]: string | string[] | undefined }
-  | Promise<{ [key: string]: string | string[] | undefined }>;
+type SearchParams = { [key: string]: string | string[] | undefined };
 
 const STATUS_OPTIONS = ["LIVE", "ENDED", "SOLD"] as const;
 const SORT_OPTIONS = [
@@ -114,7 +112,7 @@ export default async function AuctionsPage({
 }: {
   searchParams: SearchParams;
 }) {
-  const params = searchParams instanceof Promise ? await searchParams : searchParams;
+  const params = searchParams;
   const make =
     typeof params.make === "string" ? params.make.trim() || undefined : undefined;
   const model =

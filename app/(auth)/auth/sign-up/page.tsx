@@ -31,7 +31,7 @@ const FEATURES = [
 export default async function SignUpPage({
   searchParams,
 }: {
-  searchparams: { [key: string]: string | string[] | undefined }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const session = await getSession();
   const sp = searchParams ?? {};

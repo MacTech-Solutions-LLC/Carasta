@@ -70,12 +70,12 @@ export default async function MarketingAuctionDetailPage({
   params,
   searchParams,
 }: {
-  params: { handle: string; auctionId: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+  params: { handle: string; auctionId: string };
+  searchParams?: Record<string, string | string[] | undefined>;
 }) {
   if (!isMarketingEnabled()) notFound();
 
-  const { handle, auctionId } = await params;
+  const { handle, auctionId } = params;
   const session = await getSession();
   const user = await prisma.user.findUnique({
     where: { handle: handle.toLowerCase() },
@@ -162,7 +162,7 @@ export default async function MarketingAuctionDetailPage({
     presets
   );
 
-  const sp = searchParams != null ? await searchParams : {};
+  const sp = searchParams ?? {};
   const rawPresetId = firstSearchParamValue(sp, "presetId");
   const validPresetIds = new Set(presets.map((p) => p.id));
   const initialSharePresetSelection = parseSharePresetQueryParam(rawPresetId, validPresetIds);

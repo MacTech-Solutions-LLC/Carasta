@@ -10,8 +10,8 @@ export default async function NewMarketingCampaignPage({
   params,
   searchParams,
 }: {
-  params: { handle: string }>;
-  searchparams: { auctionId?: string }>;
+  params: { handle: string };
+  searchParams?: { auctionId?: string };
 }) {
   if (!isMarketingEnabled()) notFound();
 

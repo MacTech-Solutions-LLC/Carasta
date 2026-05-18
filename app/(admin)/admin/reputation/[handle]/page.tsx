@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminReputationPage({
   params,
 }: {
-  params: { handle: string }>;
+  params: { handle: string };
 }) {
   const { handle } = params;
 

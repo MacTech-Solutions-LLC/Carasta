@@ -42,7 +42,7 @@ import {
 export default async function MarketingPage({
   params,
 }: {
-  params: { handle: string }>;
+  params: { handle: string };
 }) {
   if (!isMarketingEnabled()) notFound();
 

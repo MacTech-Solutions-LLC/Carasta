@@ -14,7 +14,7 @@ import { MarketingCampaignStatus } from "@prisma/client";
 export default async function MarketingCampaignsPage({
   params,
 }: {
-  params: { handle: string }>;
+  params: { handle: string };
 }) {
   if (!isMarketingEnabled()) notFound();
 

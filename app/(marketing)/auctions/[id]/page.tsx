@@ -25,7 +25,7 @@ import {
 export default async function AuctionDetailPage({
   params,
 }: {
-  params: { id: string }>;
+  params: { id: string };
 }) {
   const { id } = params;
   const session = await getSession();
